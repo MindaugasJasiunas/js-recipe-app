@@ -154,4 +154,31 @@
       <div class="copyright">Copyright © Recipe App 2022</div>
     </div>
   </body>
+
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+  </div>
+
+  <script>
+    const span = document.getElementsByClassName('close')[0];
+    const modal = document.querySelector('.modal');
+    const newRecipeBtn = document.querySelector('.new-recipe-btn');
+
+    window.onclick = function (event) {
+      console.log(event.target);
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    };
+    span.onclick = function () {
+      modal.style.display = 'none';
+    };
+    newRecipeBtn.onclick = function () {
+      modal.style.display = 'block';
+    };
+  </script>
 </html>
