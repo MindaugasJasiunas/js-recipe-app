@@ -14,5 +14,144 @@
     <link rel="stylesheet" href="src/css/styles.css" />
     <script type="module" src="src/js/controller.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="header">
+      <img
+        src="src/img/icons8-recipe-64.png"
+        class="logo"
+        alt="Recipe App Logo"
+      />
+      <input
+        type="text"
+        id="search"
+        name="search"
+        class="search"
+        placeholder="Search for recipe..."
+      />
+      <button class="search-btn">
+        <svg>
+          <use href="src/img/icons.svg#icon-search"></use>
+        </svg>
+      </button>
+      <button class="new-recipe-btn btn">New Recipe</button>
+      <button class="bookmarks-btn btn">Bookmarks</button>
+    </div>
+    <div class="aside">
+      <div class="aside-recipes">
+        <!-- search results -->
+        <div class="aside-recipe">
+          <img
+            src="https://forkify-api.herokuapp.com/images/BBQChickenPizzawithCauliflowerCrust5004699695624ce.jpg"
+            class="aside-recipe-img"
+          />
+          <h4 class="aside-recipe-title">Recipe Title</h4>
+          <h6 class="aside-recipe-publisher">Recipe publisher</h6>
+        </div>
+        <div class="aside-recipe">
+          <img
+            src="https://forkify-api.herokuapp.com/images/BBQChickenPizzawithCauliflowerCrust5004699695624ce.jpg"
+            class="aside-recipe-img"
+          />
+          <h4 class="aside-recipe-title">Recipe Title</h4>
+          <h6 class="aside-recipe-publisher">Recipe publisher</h6>
+        </div>
+      </div>
+      <div class="pagination">
+        <!-- pagination buttons -->
+        <button class="btn-prev btn"><< Prev Page</button>
+        <button class="btn-next btn">Next Page >></button>
+      </div>
+    </div>
+    <div class="main">
+      <div>
+        <img
+          src="https://forkify-api.herokuapp.com/images/BBQChickenPizzawithCauliflowerCrust5004699695624ce.jpg"
+          class="recipe-img"
+        />
+      </div>
+      <h1 class="center-text">Title</h1>
+      <div class="recipe-info">
+        <div>
+          <svg>
+            <use href="src/img/icons.svg#icon-clock"></use>
+          </svg>
+          <span>15</span>
+          <span>min</span>
+        </div>
+        <div>
+          <svg class="recipe__info-icon">
+            <use href="src/img/icons.svg#icon-users"></use>
+          </svg>
+          <span>4</span>
+          <span>servings</span>
+          <button class="btn-decrease-servings">
+            <svg>
+              <use href="src/img/icons.svg#icon-minus-circle"></use>
+            </svg>
+          </button>
+          <button class="btn-increase-servings">
+            <svg>
+              <use href="src/img/icons.svg#icon-plus-circle"></use>
+            </svg>
+          </button>
+        </div>
+
+        <div>
+          <svg style="border: 1px solid black; border-radius: 50%">
+            <use href="src/img/icons.svg#icon-user"></use>
+          </svg>
+          <button class="btn--round">
+            <svg class="">
+              <use href="src/img/icons.svg#icon-bookmark-fill"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <h4 class="center-text">Ingredients</h4>
+
+      <div class="recipe-ingredients">
+        <li class="recipe-ingredient">
+          <span class="ingredient-quantity">1000</span>
+          <span class="ingredient-unit">g</span>
+          <span class="ingredient-description">pasta</span>
+        </li>
+        <li class="recipe-ingredient">
+          <span class="ingredient-quantity">1000</span>
+          <span class="ingredient-unit">g</span>
+          <span class="ingredient-description">pasta</span>
+        </li>
+        <li class="recipe-ingredient">
+          <span class="ingredient-quantity">0.5</span>
+          <span class="ingredient-unit">cup</span>
+          <span class="ingredient-description">ricotta cheese</span>
+        </li>
+        <li class="recipe-ingredient">
+          <span class="ingredient-quantity">1000</span>
+          <span class="ingredient-unit">g</span>
+          <span class="ingredient-description">pasta</span>
+        </li>
+      </div>
+
+      <h4 class="center-text">Directions</h4>
+      <p class="recipe-directions">
+        This recipe was carefully designed and tested by
+        <span class="recipe__publisher">The Pioneer Woman</span>. Please check
+        out directions at their website.
+      </p>
+      <p class="publisher-link">
+        <a
+          href="http://thepioneerwoman.com/cooking/pasta-with-tomato-cream-sauce/"
+          target="_blank"
+        >
+          Directions
+          <svg class="search__icon">
+            <use href="src/img/icons.svg#icon-arrow-right"></use>
+          </svg>
+        </a>
+      </p>
+    </div>
+    <div class="footer">
+      <div class="copyright">Copyright © Recipe App 2022</div>
+    </div>
+  </body>
 </html>
