@@ -113,6 +113,11 @@ svg {
   flex-basis: 50%;
 }
 
+.user-created-svg {
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
 .center-text {
   text-align: center;
 }
