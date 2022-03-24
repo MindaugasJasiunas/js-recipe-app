@@ -1,5 +1,7 @@
 {
   "name": "recipe-app",
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "version": "1.0.0",
   "description": "Simple recipe app written in vanilla Javascript",
   "scripts": {
