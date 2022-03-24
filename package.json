@@ -4,6 +4,8 @@
   "description": "Simple recipe app written in vanilla Javascript",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
@@ -14,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/MindaugasJasiunas/js-recipe-app/issues"
   },
-  "homepage": "https://github.com/MindaugasJasiunas/js-recipe-app#readme"
+  "homepage": "https://github.com/MindaugasJasiunas/js-recipe-app#readme",
+  "devDependencies": {
+    "parcel": "^2.4.0"
+  }
 }
