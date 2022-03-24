@@ -80,6 +80,13 @@ export default class RecipeView extends View {
   </p>
     `;
   }
+
+  
+  handleHashChangeAndPageLoad(handler){
+    // add event listener
+    ['hashchange', 'load'].forEach(action => window.addEventListener(action, handler));
+  }
 }
+
 
 export default new RecipeView();

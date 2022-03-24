@@ -25,17 +25,8 @@ const controlRecipe = async function () {
   }
 };
 
-const controlSearchResults = async function () {
-  try {
-    const searchQuery = 'pizza';
-    // load search results (recipes)
-    await model.loadSearchResults(searchQuery);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-controlRecipe();
-console.log(model.state.search);
-controlSearchResults();
-console.log(model.state.search);
+// controlRecipe();
+function init() {
+  recipeView.handleHashChangeAndPageLoad(controlRecipe);
+}
+init();
