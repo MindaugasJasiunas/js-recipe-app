@@ -19,5 +19,9 @@
   "homepage": "https://github.com/MindaugasJasiunas/js-recipe-app#readme",
   "devDependencies": {
     "parcel": "^2.4.0"
+  },
+  "dependencies": {
+    "core-js": "^3.21.1",
+    "regenerator-runtime": "^0.13.9"
   }
 }
