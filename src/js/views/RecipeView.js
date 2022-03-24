@@ -85,7 +85,7 @@ export default class RecipeView extends View {
   handleHashChangeAndPageLoad(handler){
     // add event listener
     ['hashchange', 'load'].forEach(action => window.addEventListener(action, handler));
-  }
+  } 
 }
 
 
