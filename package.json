@@ -1,0 +1,18 @@
+{
+  "name": "recipe-app",
+  "version": "1.0.0",
+  "description": "Simple recipe app written in vanilla Javascript",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MindaugasJasiunas/js-recipe-app.git"
+  },
+  "author": "Mindaugas Jasiunas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MindaugasJasiunas/js-recipe-app/issues"
+  },
+  "homepage": "https://github.com/MindaugasJasiunas/js-recipe-app#readme"
+}
