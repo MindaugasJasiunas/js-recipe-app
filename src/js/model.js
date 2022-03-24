@@ -16,6 +16,8 @@ export const loadRecipe = async function (id) {
     // load recipe
     let data = await fetch(`${API_URL}/${id}`);
     data = await data.json();
+    if (data.data === undefined)
+      throw new Error('Uh oh. Cannot load recipe. Try again.');
     const { recipe } = data.data;
 
     // update recipe in state (imports/exports has live connection)

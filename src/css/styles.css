@@ -110,7 +110,7 @@ svg {
 }
 
 .recipe-ingredient {
-  flex-basis: 50%;
+  flex-basis: 49%;
 }
 
 .user-created-svg {
@@ -165,6 +165,26 @@ svg {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.spinner {
+  margin: 5rem auto;
+  text-align: center;
+}
+.spinner svg {
+  height: 6rem;
+  width: 6rem;
+  fill: #f38e82;
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media only screen and (max-width: 500px) {

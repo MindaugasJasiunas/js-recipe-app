@@ -1,4 +1,5 @@
-class View {
+import icons from './../../img/icons.svg';
+export default class View {
   _data;
 
   /**
@@ -9,10 +10,13 @@ class View {
    * @this {Object} View instance
    */
   render(data, render = true) {
+    if (!data || (Array.isArray(data) && data.length === 0))
+      return this.renderError('Results is empty');
     this._data = data;
-    const markup = _generateMarkup();
+    const markup = this._generateMarkup();
+    if (!render) return markup;
     this._clear();
-    _parentElement.insertAdjacentHTML('afterbegin', markup);
+    this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
   /**
@@ -32,15 +36,32 @@ class View {
 
   renderSpinner() {
     // render spinner animation to the view until results arrive & is rendered
-    const markup = ``;
+    const markup = `
+      <div class="spinner">
+        <svg>
+          <use href="${icons}#icon-loader"></use>
+        </svg>
+      </div>
+    `;
     // attach to parent element
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
-  renderError(errorMsg) {
+  renderError(
+    errorMsg = 'We could not find what you are looking for. Please try again!'
+  ) {
     // render error message
-    const markup = ``;
+    const markup = `
+        <div class="error center-text">
+        <p>  
+          <svg>
+            <use href="${icons}#icon-alert-triangle"></use>
+          </svg>
+          ${errorMsg}
+        </p>
+        </div>
+      `;
     // attach to parent element
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
@@ -48,7 +69,16 @@ class View {
 
   renderMessage(msg) {
     // render message
-    const markup = ``;
+    const markup = `
+        <div class="msg center-text">
+        <p>
+          <svg>
+            <use href="${icons}#icon-smile"></use>
+          </svg>
+          ${msg}
+        </p>
+        </div>
+      `;
     // attach to parent element
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
