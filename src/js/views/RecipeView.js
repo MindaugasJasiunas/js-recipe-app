@@ -1,8 +1,10 @@
-import View from './View.js';
+// import View from './View.js';
 import icons from '../../img/icons.svg';
 
-export default class RecipeView extends View {
-  _parentElement= document.querySelector('.main');
+import View from './View.js';
+
+class RecipeView extends View {
+  _parentElement = document.querySelector('.main');
 
   _generateMarkup() {
     // generate markup to the parent element in the DOM
@@ -53,16 +55,21 @@ export default class RecipeView extends View {
   </div>
   <h4 class="center-text">Ingredients</h4>
 
-  ${this._data.ingredients.map(ingredient => 
-    `<div class="recipe-ingredients">
+  ${this._data.ingredients
+    .map(
+      ingredient =>
+        `<div class="recipe-ingredients">
     <li class="recipe-ingredient">
-      <span class="ingredient-quantity">${ingredient.quantity? ingredient.quantity : ''}</span>
+      <span class="ingredient-quantity">${
+        ingredient.quantity ? ingredient.quantity : ''
+      }</span>
       <span class="ingredient-unit">${ingredient.unit}</span>
       <span class="ingredient-description">${ingredient.description}</span>
     </li>
 
   </div>`
-  ).join('')}
+    )
+    .join('')}
   
   <h4 class="center-text">Directions</h4>
   <p class="recipe-directions">
@@ -81,12 +88,11 @@ export default class RecipeView extends View {
     `;
   }
 
-  
-  handleHashChangeAndPageLoad(handler){
+  handleHashChangeAndPageLoad(handler) {
     // add event listener
-    ['hashchange', 'load'].forEach(action => window.addEventListener(action, handler));
-  } 
+    ['hashchange', 'load'].forEach(action =>
+      window.addEventListener(action, handler)
+    );
+  }
 }
-
-
 export default new RecipeView();
