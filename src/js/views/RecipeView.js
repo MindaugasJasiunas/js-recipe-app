@@ -47,9 +47,15 @@ class RecipeView extends View {
     </div>
 
     <div>
-      <svg class="user-created-svg">
-        <use href="${icons}#icon-user"></use>
-      </svg>
+        ${
+          this._data.key
+            ? `
+            <svg class="user-created-svg">
+            <use href="${icons}#icon-user"></use>
+          </svg>
+            `
+            : ``
+        }
       <button class="btn-bookmark">
         <svg>
           <use href="${icons}#icon-bookmark${

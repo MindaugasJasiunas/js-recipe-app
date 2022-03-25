@@ -12,6 +12,20 @@ export const state = {
   bookmarks: [],
 };
 
+const createRecipeObject = function (recipe) {
+  return {
+    id: recipe.id,
+    title: recipe.title,
+    publisher: recipe.publisher,
+    sourceUrl: recipe.source_url,
+    image: recipe.image_url,
+    servings: recipe.servings,
+    cookingTime: recipe.cooking_time,
+    ingredients: recipe.ingredients,
+    ...(recipe.key && { key: recipe.key }),
+  };
+};
+
 export const loadRecipe = async function (id) {
   try {
     // load recipe
@@ -21,16 +35,7 @@ export const loadRecipe = async function (id) {
     const { recipe } = data.data;
 
     // update recipe in state (imports/exports has live connection)
-    state.recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients,
-    };
+    state.recipe = createRecipeObject(recipe);
 
     // check if bookmarked
     if (state.bookmarks.some(bookmark => bookmark.id === id)) {
@@ -64,6 +69,7 @@ export const loadSearchResults = async function (searchQuery) {
         servings: recipe.servings,
         cookingTime: recipe.cooking_time,
         ingredients: recipe.ingredients,
+        ...(recipe.key && { key: recipe.key }),
       };
     });
   } catch (err) {
@@ -152,18 +158,7 @@ export const uploadRecipe = async function (newRecipe) {
     // upload recipe
     const data = await AJAX(`${API_URL}?key=${API_KEY}`, recipe);
 
-    // state.recipe = createRecipeObject(data.data.recipe);
-    const recipeReturned = data.data.recipe;
-    state.recipe = {
-      id: recipeReturned.id,
-      title: recipeReturned.title,
-      publisher: recipeReturned.publisher,
-      sourceUrl: recipeReturned.source_url,
-      image: recipeReturned.image_url,
-      servings: recipeReturned.servings,
-      cookingTime: recipeReturned.cooking_time,
-      ingredients: recipeReturned.ingredients,
-    };
+    state.recipe = createRecipeObject(data.data.recipe);
     addBookmark(state.recipe);
   } catch (err) {
     throw err;
