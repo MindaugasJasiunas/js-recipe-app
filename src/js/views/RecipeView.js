@@ -1,6 +1,8 @@
 import View from './View.js';
 import icons from '../../img/icons.svg';
 
+import fracty from 'fracty';
+
 class RecipeView extends View {
   _parentElement = document.querySelector('.main');
 
@@ -63,7 +65,7 @@ class RecipeView extends View {
         `<div class="recipe-ingredients">
     <li class="recipe-ingredient">
       <span class="ingredient-quantity">${
-        ingredient.quantity ? ingredient.quantity : ''
+        ingredient.quantity ? fracty(ingredient.quantity).toString() : ''
       }</span>
       <span class="ingredient-unit">${ingredient.unit}</span>
       <span class="ingredient-description">${ingredient.description}</span>
