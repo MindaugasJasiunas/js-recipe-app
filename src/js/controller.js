@@ -4,6 +4,7 @@ import 'regenerator-runtime/runtime';
 import * as model from './model.js';
 import recipeView from './views/RecipeView.js';
 import resultsView from './views/ResultsView.js';
+import searchView from './views/SearchView.js';
 
 const controlRecipe = async function () {
   if (window.location.hash === '') return;
@@ -27,7 +28,9 @@ const controlRecipe = async function () {
 };
 
 const controlResults = async function () {
-  const query = 'pizza';
+  //get search query
+  const query = searchView.getQuery();
+  if (!query) return;
 
   // load recipes
   await model.loadSearchResults(query);
@@ -38,5 +41,6 @@ const controlResults = async function () {
 
 function init() {
   recipeView.handleHashChangeAndPageLoad(controlRecipe);
+  searchView.addHandlerSearch(controlResults);
 }
 init();

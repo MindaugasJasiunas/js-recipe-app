@@ -42,8 +42,7 @@ body {
   height: 100%;
 }
 
-.search {
-  flex-grow: 2;
+.search-input {
   padding: 16px 32px;
 }
 
