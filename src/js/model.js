@@ -1,4 +1,4 @@
-import { RESULTS_PER_PAGE, API_URL } from './config.js';
+import { RESULTS_PER_PAGE, API_URL, API_KEY } from './config.js';
 
 export const state = {
   recipe: {},
@@ -14,7 +14,7 @@ export const state = {
 export const loadRecipe = async function (id) {
   try {
     // load recipe
-    let data = await fetch(`${API_URL}/${id}`);
+    let data = await fetch(`${API_URL}/${id}?key=${API_KEY}`);
     data = await data.json();
     if (data.data === undefined)
       throw new Error('Uh oh. Cannot load recipe. Try again.');
@@ -118,6 +118,61 @@ export const deleteBookmark = function (id) {
   if (id === state.recipe.id) state.recipe.bookmarked = false;
 
   persistBookmarks();
+};
+
+export const uploadRecipe = async function (newRecipe) {
+  try {
+    const ingredients = Object.entries(newRecipe)
+      .filter(entry => entry[0].startsWith('ingredient-') && entry[1] !== '')
+      .map(ingredient => {
+        const ingredientArr = ingredient[1].split(',');
+        const [quantity, units, description] = ingredientArr;
+        if (ingredientArr.length !== 3) {
+          throw new Error(
+            'Wrong ingredient format. Please use the correct format.'
+          );
+        }
+        return {
+          quantity: quantity ? Number(quantity) : null,
+          units,
+          description,
+        };
+      });
+
+    const recipe = {
+      id: newRecipe.id,
+      title: newRecipe.title,
+      publisher: newRecipe.publisher,
+      source_url: newRecipe.sourceUrl,
+      image_url: newRecipe.image,
+      servings: +newRecipe.servings,
+      cooking_time: +newRecipe.cookingTime,
+      ingredients: ingredients,
+    };
+
+    // upload recipe
+    let data = await fetch(`${API_URL}?key=${API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(recipe),
+    });
+    data = await data.json();
+
+    const recipeReturned = data.data.recipe;
+    state.recipe = {
+      id: recipeReturned.id,
+      title: recipeReturned.title,
+      publisher: recipeReturned.publisher,
+      sourceUrl: recipeReturned.source_url,
+      image: recipeReturned.image_url,
+      servings: recipeReturned.servings,
+      cookingTime: recipeReturned.cooking_time,
+      ingredients: recipeReturned.ingredients,
+    };
+    addBookmark(state.recipe);
+  } catch (err) {
+    throw err;
+  }
 };
 
 // read bookmarks from localStorage

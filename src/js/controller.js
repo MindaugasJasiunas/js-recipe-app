@@ -7,6 +7,7 @@ import resultsView from './views/ResultsView.js';
 import searchView from './views/SearchView.js';
 import paginationView from './views/PaginationView.js';
 import bookmarksView from './views/BookmarksView.js';
+import addNewRecipeView from './views/AddNewRecipeView.js';
 
 const controlRecipe = async function () {
   if (window.location.hash === '') return;
@@ -85,11 +86,29 @@ const controlAddBookmark = function () {
 
   //render bookmarks
   bookmarksView.render(model.state.bookmarks);
-  //controlBookmarks();
 };
 
 const toggleBookmarks = function () {
   bookmarksView.toggleBookmarks();
+};
+
+const controlAddRecipe = async function (data) {
+  try {
+    // upload new recipe data
+    await model.uploadRecipe(data);
+    // render recipe
+    recipeView.render(model.state.recipe);
+    bookmarksView.render(model.state.bookmarks);
+    // change ID in URL - we can use History API - change URL without reloading the page
+    window.history.pushState(null, '', `#${model.state.recipe.id}`); // (state, title, URL)
+    // window.history.back();
+
+    //close form window
+    addNewRecipeView._closeWindow();
+  } catch (err) {
+    console.log('ERROR: ', err);
+    addNewRecipeView.renderError(err.message);
+  }
 };
 
 function init() {
@@ -100,5 +119,6 @@ function init() {
   bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
   bookmarksView.addHandlerBookmarksView(toggleBookmarks);
+  addNewRecipeView.addHandlerUpload(controlAddRecipe);
 }
 init();
