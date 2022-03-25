@@ -107,7 +107,7 @@ export const addBookmark = function (recipe) {
   // add bookmark
   state.bookmarks.push(recipe);
 
-  // mark current recipe as bookmark
+  // mark current recipe as bookmarked
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
 
   persistBookmarks();
