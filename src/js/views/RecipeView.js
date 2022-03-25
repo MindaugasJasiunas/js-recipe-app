@@ -1,7 +1,5 @@
-// import View from './View.js';
-import icons from '../../img/icons.svg';
-
 import View from './View.js';
+import icons from '../../img/icons.svg';
 
 class RecipeView extends View {
   _parentElement = document.querySelector('.main');
@@ -30,12 +28,16 @@ class RecipeView extends View {
       </svg>
       <span>${this._data.servings}</span>
       <span>servings</span>
-      <button class="btn-decrease-servings">
+      <button class="btn-decrease-servings btn-servings" data-update-to="${
+        Number(this._data.servings) - 1
+      }">
         <svg>
           <use href="${icons}#icon-minus-circle"></use>
         </svg>
       </button>
-      <button class="btn-increase-servings">
+      <button class="btn-increase-servings btn-servings" data-update-to="${
+        Number(this._data.servings) + 1
+      }">
         <svg>
           <use href="${icons}#icon-plus-circle"></use>
         </svg>
@@ -93,6 +95,15 @@ class RecipeView extends View {
     ['hashchange', 'load'].forEach(action =>
       window.addEventListener(action, handler)
     );
+  }
+
+  addHandlerClick(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn-servings');
+      if (!btn) return;
+      const newServings = btn.dataset.updateTo;
+      handler(newServings);
+    });
   }
 }
 export default new RecipeView();
