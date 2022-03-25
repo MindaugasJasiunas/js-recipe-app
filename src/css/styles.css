@@ -77,6 +77,10 @@ svg {
   display: flex;
   flex-direction: row;
 }
+.aside-recipes a {
+  text-decoration: none;
+  color: black;
+}
 .aside-recipe-img {
   margin-left: 15px;
   margin-top: auto;
