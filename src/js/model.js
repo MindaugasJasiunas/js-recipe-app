@@ -1,4 +1,5 @@
 import { RESULTS_PER_PAGE, API_URL, API_KEY } from './config.js';
+import { AJAX } from './helpers.js';
 
 export const state = {
   recipe: {},
@@ -14,8 +15,7 @@ export const state = {
 export const loadRecipe = async function (id) {
   try {
     // load recipe
-    let data = await fetch(`${API_URL}/${id}?key=${API_KEY}`);
-    data = await data.json();
+    const data = await AJAX(`${API_URL}/${id}?key=${API_KEY}`);
     if (data.data === undefined)
       throw new Error('Uh oh. Cannot load recipe. Try again.');
     const { recipe } = data.data;
@@ -52,8 +52,7 @@ export const loadSearchResults = async function (searchQuery) {
     state.search.query = searchQuery;
 
     // load recipe
-    let data = await fetch(`${API_URL}?search=${searchQuery}`);
-    data = await data.json();
+    const data = await AJAX(`${API_URL}?search=${searchQuery}&key=${API_KEY}`);
 
     state.search.results = data.data.recipes.map(recipe => {
       return {
@@ -151,13 +150,9 @@ export const uploadRecipe = async function (newRecipe) {
     };
 
     // upload recipe
-    let data = await fetch(`${API_URL}?key=${API_KEY}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(recipe),
-    });
-    data = await data.json();
+    const data = await AJAX(`${API_URL}?key=${API_KEY}`, recipe);
 
+    // state.recipe = createRecipeObject(data.data.recipe);
     const recipeReturned = data.data.recipe;
     state.recipe = {
       id: recipeReturned.id,
