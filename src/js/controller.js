@@ -6,6 +6,7 @@ import recipeView from './views/RecipeView.js';
 import resultsView from './views/ResultsView.js';
 import searchView from './views/SearchView.js';
 import paginationView from './views/PaginationView.js';
+import bookmarksView from './views/BookmarksView.js';
 
 const controlRecipe = async function () {
   if (window.location.hash === '') return;
@@ -68,10 +69,36 @@ const controlServings = function (newServings) {
   // recipeView.update(model.state.recipe);
 };
 
+const controlBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
+
+const controlAddBookmark = function () {
+  // add/remove bookmark
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else if (model.state.recipe.bookmarked)
+    model.deleteBookmark(model.state.recipe.id);
+
+  // update recipe view
+  // recipeView.update(model.state.recipe);
+  recipeView.render(model.state.recipe);
+
+  //render bookmarks
+  bookmarksView.render(model.state.bookmarks);
+  //controlBookmarks();
+};
+
+const toggleBookmarks = function () {
+  bookmarksView.toggleBookmarks();
+};
+
 function init() {
   recipeView.handleHashChangeAndPageLoad(controlRecipe);
   searchView.addHandlerSearch(controlResults);
   paginationView.addHandlerClick(controlPagination);
   recipeView.addHandlerClick(controlServings);
+  bookmarksView.addHandlerRender(controlBookmarks);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
+  bookmarksView.addHandlerBookmarksView(toggleBookmarks);
 }
 init();

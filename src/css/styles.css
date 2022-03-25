@@ -42,6 +42,10 @@ body {
   height: 100%;
 }
 
+.search {
+  flex-grow: 1;
+}
+
 .search-input {
   padding: 16px 32px;
 }
@@ -188,6 +192,51 @@ svg {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.bookmarks {
+  position: absolute;
+  background-color: white;
+
+  top: 60px;
+  right: 0;
+  width: 300px;
+  height: 200px;
+  border: 3px solid black;
+
+  overflow: auto;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+.bookmark-recipe {
+  display: flex;
+  flex-wrap: nowrap;
+  border: 1px solid #968450;
+  border-radius: 5px 5px 5px 5px;
+  text-decoration: none;
+}
+.bookmarks a {
+  text-decoration: none;
+  color: black;
+}
+.bookmarks ul {
+  list-style-type: none;
+  padding: 5px;
+  margin-top: 5px;
+}
+/* .bookmark-list {} */
+
+.bookmark-recipe-img {
+  margin-left: 15px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 15px;
+
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }
 
 @media only screen and (max-width: 500px) {
