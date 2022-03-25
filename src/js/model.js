@@ -71,3 +71,9 @@ export const loadSearchResults = async function (searchQuery) {
     throw err; // re-throw error (handled in controller)
   }
 };
+
+export const getSearchResultsPage = function () {
+  const start = (state.search.page - 1) * state.search.resultsPerPage;
+  const end = state.search.page * state.search.resultsPerPage;
+  return state.search.results.slice(start, end);
+};

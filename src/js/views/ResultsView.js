@@ -5,7 +5,6 @@ class ResultsView extends View {
 
   _generateMarkup() {
     // generate markup to the parent element in the DOM
-    console.log(this._data);
     return this._data
       .map(recipe => {
         return `
