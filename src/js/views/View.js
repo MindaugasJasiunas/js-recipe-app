@@ -27,6 +27,40 @@ export default class View {
    */
   update(data) {
     // Update DOM elements without reloading whole page
+
+    if (!data) return;
+    this._data = data;
+
+    //get all markup for comparison with new markup
+    const newMarkup = this._generateMarkup();
+
+    //convert string to DOM object - for comparison
+    const newDOM = document.createRange().createContextualFragment(newMarkup);
+
+    //convert to arrays of elements
+    const newElements = Array.from(newDOM.querySelectorAll('*'));
+    const curElements = Array.from(this._parentElement.querySelectorAll('*'));
+
+    // compare & change TEXT on elements
+    newElements.forEach((newElement, index) => {
+      const curElement = curElements[index];
+      // change elements that are not the same
+      if (
+        !newElement.isEqualNode(curElement) &&
+        newElement.firstChild?.nodeValue.trim() !== ''
+      ) {
+        // Node.nodeValue - returns text if text, or NULL if Document, ELement...
+        curElement.textContent = newElement.textContent;
+      }
+
+      // change ATTRIBUTES on elements
+      if (!newElement.isEqualNode(curElement)) {
+        //change object to array, loop & change attributes of original element
+        Array.from(newElement.attributes).forEach(attr => {
+          curElement.setAttribute(attr.name, attr.value);
+        });
+      }
+    });
   }
 
   _clear() {

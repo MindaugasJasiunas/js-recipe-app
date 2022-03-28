@@ -66,8 +66,8 @@ const controlServings = function (newServings) {
   model.updateServings(newServings);
 
   // update view (without reloading whole page)
-  recipeView.render(model.state.recipe);
-  // recipeView.update(model.state.recipe);
+  // recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
 
 const controlBookmarks = function () {
@@ -81,8 +81,8 @@ const controlAddBookmark = function () {
     model.deleteBookmark(model.state.recipe.id);
 
   // update recipe view
-  // recipeView.update(model.state.recipe);
-  recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
+  // recipeView.render(model.state.recipe);
 
   //render bookmarks
   bookmarksView.render(model.state.bookmarks);
